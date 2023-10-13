@@ -12,6 +12,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     timeout-minutes: 15
+    if: ${{ github.repository == 'teruyamato0731/pio-template' }}
     steps:
       - uses: actions/checkout@v3
 
@@ -22,10 +23,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run make ci-build in dev container
+      - name: Pre-build dev container
         uses: devcontainers/ci@v0.3
         with:
           imageName: ghcr.io/${{ github.repository_owner }}/pio-template-devcontainer
           cacheFrom: ghcr.io/${{ github.repository_owner }}/pio-template-devcontainer
           skipContainerUserIdUpdate: true
-          runCmd: pio run
