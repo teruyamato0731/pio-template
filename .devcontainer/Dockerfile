@@ -14,4 +14,4 @@ RUN python3 -m pip install --no-cache-dir -U \
   prettytable \
   six \
   jsonschema
-RUN pio system completion install bash
+RUN pio system completion install bash --path /etc/bash_completion.d/platformio
